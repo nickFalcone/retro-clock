@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import DayDate from "./DayDate";
+import LightButton from "./LightButton";
 
 const Clock = (props) => {
   const [time, setTime] = useState(new Date());
@@ -11,16 +12,7 @@ const Clock = (props) => {
   });
   return (
     <div id="outerFace">
-      <button
-        onMouseDown={() => {
-          document.getElementById("lcdFace").classList.add("light");
-        }}
-        onMouseUp={() => {
-          document.getElementById("lcdFace").classList.remove("light");
-        }}
-      >
-        Light
-      </button>
+      <LightButton />
       <h1>{props.brand}</h1> <span className="model">{props.model}</span>
       {/* Day of week should be two characters. Weekday: "short" gives us three. */}
       <div id="lcdFace">
