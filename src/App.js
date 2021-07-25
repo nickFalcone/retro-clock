@@ -1,10 +1,10 @@
 import { render } from "react-dom";
-import Heading from "./Heading";
+import Clock from "./Clock";
 
 const App = () => {
   return (
     <div>
-      <Heading title="hello world" />
+      <Clock brand="Casio" model="F-91W" />
     </div>
   );
 };
