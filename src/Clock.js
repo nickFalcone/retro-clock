@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import DayDate from "./DayDate";
 import LightButton from "./LightButton";
+import HourMinute from "./HourMinute";
 
 const Clock = (props) => {
   const [time, setTime] = useState(new Date());
@@ -12,36 +13,26 @@ const Clock = (props) => {
   });
   return (
     <div id="outerFace">
+      <div className="make-model">
+        <h1>{props.brand}</h1> <span className="model">{props.model}</span>
+      </div>
       <LightButton />
-      <h1>{props.brand}</h1> <span className="model">{props.model}</span>
+      <span className="feature">ALARM CHRONOGRAPH</span>
       {/* Day of week should be two characters. Weekday: "short" gives us three. */}
       <div id="lcdFace">
-        <DayDate time={time} twentyFourHour={twentyFourHour} />
-        <span className="time">
-          {/* Remove AM/PM from the time string - it is displayed above */}
-          {twentyFourHour
-            ? time
-                .toLocaleTimeString("en-US", { hour12: !twentyFourHour })
-                .slice(0, -3)
-            : time
-                .toLocaleTimeString("en-US", { hour12: !twentyFourHour })
-                .slice(0, -6)}
-          <span className="seconds">
-            {time.getSeconds().toLocaleString("en-US", {
-              minimumIntegerDigits: 2,
-              useGrouping: false,
-            })}
-          </span>
-        </span>
+        <div class="black-border">
+          <DayDate time={time} twentyFourHour={twentyFourHour} />
+          <HourMinute time={time} twentyFourHour={twentyFourHour} />
+        </div>
       </div>
       <p>
-        Mode Alarm On.Off
+        MODE
         <button onClick={() => setTwentyFourHours(!twentyFourHour)}>
-          24HR
+          ALARM ON&sdot;OFF / 24HR
         </button>
       </p>
-      <p>
-        Water <span>WR</span> Resist
+      <p className="water-resist">
+        WATER <span className="wr">WR</span> RESIST
       </p>
     </div>
   );

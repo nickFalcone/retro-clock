@@ -4,7 +4,7 @@ import Clock from "./Clock";
 const App = () => {
   return (
     <div>
-      <Clock brand="Casio" model="F-91W" />
+      <Clock brand="CASIO" model="F-91W" />
     </div>
   );
 };

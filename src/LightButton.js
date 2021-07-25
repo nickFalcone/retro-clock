@@ -4,7 +4,13 @@ const LightButton = () => {
       onMouseDown={() => {
         document.getElementById("lcdFace").classList.add("light");
       }}
+      onTouchStart={() => {
+        document.getElementById("lcdFace").classList.add("light");
+      }}
       onMouseUp={() => {
+        document.getElementById("lcdFace").classList.remove("light");
+      }}
+      onTouchEnd={() => {
         document.getElementById("lcdFace").classList.remove("light");
       }}
     >
