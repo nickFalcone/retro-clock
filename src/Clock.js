@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import DayDate from "./DayDate";
 
 const Clock = (props) => {
   const [time, setTime] = useState(new Date());
@@ -20,26 +21,11 @@ const Clock = (props) => {
       >
         Light
       </button>
-      <h1>{props.brand}</h1> <span class="model">{props.model}</span>
+      <h1>{props.brand}</h1> <span className="model">{props.model}</span>
       {/* Day of week should be two characters. Weekday: "short" gives us three. */}
       <div id="lcdFace">
-        <div class="day-date">
-          <div class="twenty-four-am-pm">
-            <span class="twenty-four">{twentyFourHour ? "24H" : ""}</span>
-            <span class="am-pm">
-              {twentyFourHour ? "" : time.getHours() >= 12 ? "PM" : "AM"}
-            </span>
-          </div>
-          <span class="day">
-            {time
-              .toLocaleString("en-us", { weekday: "short" })
-              .slice(0, 2)
-              .toUpperCase()}
-          </span>
-          &nbsp;
-          <span class="date">{time.getDate()}</span> <br />
-        </div>
-        <span class="time">
+        <DayDate time={time} twentyFourHour={twentyFourHour} />
+        <span className="time">
           {/* Remove AM/PM from the time string - it is displayed above */}
           {twentyFourHour
             ? time
@@ -48,7 +34,7 @@ const Clock = (props) => {
             : time
                 .toLocaleTimeString("en-US", { hour12: !twentyFourHour })
                 .slice(0, -6)}
-          <span class="seconds">
+          <span className="seconds">
             {time.getSeconds().toLocaleString("en-US", {
               minimumIntegerDigits: 2,
               useGrouping: false,
