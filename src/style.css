@@ -1,6 +1,9 @@
 @font-face {
   font-family: "Digi";
+  font-style: normal;
+  font-weight: 400;
   src: local("Digi"), url(../font/ds-digi.woff2) format("woff2");
+  font-display: block;
 }
 
 body {
