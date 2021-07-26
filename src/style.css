@@ -148,3 +148,14 @@ h1 {
     width: 90%;
   }
 }
+
+footer {
+  width: 100%;
+  text-align: center;
+  margin: 10px auto;
+  color: #fff;
+}
+
+footer a {
+  color: #fff;
+}
