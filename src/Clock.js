@@ -19,7 +19,7 @@ const Clock = (props) => {
       <LightButton />
       <span className="feature">ALARM CHRONOGRAPH</span>
       <div id="lcdFace">
-        <div class="black-border">
+        <div className="black-border">
           <DayDate time={time} twentyFourHour={twentyFourHour} />
           <HourMinute time={time} twentyFourHour={twentyFourHour} />
         </div>
