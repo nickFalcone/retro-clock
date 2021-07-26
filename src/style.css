@@ -130,7 +130,7 @@ h1 {
 }
 
 .wr {
-  color: #942f2d;
+  color: #ce4441; /* #942f2d; original color does not meet AA 4.5 contrast ratio */
   border: 2px solid #0d69ae;
   border-radius: 10px;
   padding: 1px 8px;
