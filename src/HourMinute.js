@@ -1,6 +1,6 @@
 const HourMinute = (props) => {
   return (
-    <span className="time">
+    <time className="time">
       {/* Remove AM/PM from the time string - it is displayed above */}
       {props.twentyFourHour
         ? props.time
@@ -15,7 +15,7 @@ const HourMinute = (props) => {
           useGrouping: false,
         })}
       </span>
-    </span>
+    </time>
   );
 };
 
