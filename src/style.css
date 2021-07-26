@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Digi";
-  src: local("Digi"), url(./ds-digi.woff2) format("woff2");
+  src: local("Digi"), url(../font/ds-digi.woff2) format("woff2");
 }
 
 body {

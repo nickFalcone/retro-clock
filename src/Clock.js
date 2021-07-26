@@ -18,7 +18,6 @@ const Clock = (props) => {
       </div>
       <LightButton />
       <span className="feature">ALARM CHRONOGRAPH</span>
-      {/* Day of week should be two characters. Weekday: "short" gives us three. */}
       <div id="lcdFace">
         <div class="black-border">
           <DayDate time={time} twentyFourHour={twentyFourHour} />
