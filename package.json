@@ -1,5 +1,5 @@
 {
-  "name": "base-react",
+  "name": "retro-clock",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nickFalcone/base-react.git"
+    "url": "git+https://github.com/nickFalcone/retro-clock.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nickFalcone/base-react/issues"
+    "url": "https://github.com/nickFalcone/retro-clock/issues"
   },
-  "homepage": "https://github.com/nickFalcone/base-react#readme",
+  "homepage": "https://github.com/nickFalcone/retro-clock#readme",
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
