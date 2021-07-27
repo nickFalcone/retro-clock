@@ -4,11 +4,7 @@ const DayDate = (props) => {
       <div className="twenty-four-am-pm">
         <span className="twenty-four">{props.twentyFourHour ? "24H" : ""}</span>
         <span className="am-pm">
-          {props.twentyFourHour
-            ? ""
-            : props.time.getHours() >= 12
-            ? "PM"
-            : "AM"}
+          {props.twentyFourHour ? "" : props.time.getHours() >= 12 ? "PM" : ""}
         </span>
       </div>
       <span className="day">
