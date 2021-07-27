@@ -13,6 +13,8 @@ const Clock = (props) => {
     return () => clearTimeout(updateTime);
   });
 
+  let holdTimer;
+
   const mouseDownHandler = () => {
     const dayDate = document.querySelector(".day-date");
     const time = document.querySelector(".time");
