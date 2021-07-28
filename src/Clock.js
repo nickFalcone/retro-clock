@@ -11,7 +11,7 @@ const Clock = (props) => {
   useEffect(() => {
     const updateTime = setTimeout(() => setTime(new Date()), 1000);
     return () => clearTimeout(updateTime);
-  });
+  }, [time, setTime]);
 
   let holdTimer;
 
