@@ -1,17 +1,33 @@
-const LightButton = () => {
+import { FunctionComponent } from "react";
+
+const LightButton: FunctionComponent = () => {
+  const lcdFace = document.getElementById("lcdFace");
+
+  const addLight = () => {
+    if (lcdFace) {
+      lcdFace.classList.add("light");
+    }
+  };
+
+  const removeLight = () => {
+    if (lcdFace) {
+      lcdFace.classList.remove("light");
+    }
+  };
+
   return (
     <button
       onMouseDown={() => {
-        document.getElementById("lcdFace").classList.add("light");
+        addLight();
       }}
       onTouchStart={() => {
-        document.getElementById("lcdFace").classList.add("light");
+        addLight();
       }}
       onMouseUp={() => {
-        document.getElementById("lcdFace").classList.remove("light");
+        removeLight();
       }}
       onTouchEnd={() => {
-        document.getElementById("lcdFace").classList.remove("light");
+        removeLight();
       }}
     >
       Light

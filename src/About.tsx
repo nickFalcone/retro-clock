@@ -1,4 +1,6 @@
-const About = () => {
+import { FunctionComponent } from "react";
+
+const About: FunctionComponent = () => {
   return (
     <footer>
       Based on the{" "}

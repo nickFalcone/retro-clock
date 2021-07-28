@@ -1,4 +1,11 @@
-const HourMinute = (props) => {
+import { FunctionComponent } from "react";
+
+interface Props {
+  time: Date;
+  twentyFourHour: boolean;
+}
+
+const HourMinute: FunctionComponent<Props> = (props) => {
   return (
     <time className="time">
       {props.twentyFourHour

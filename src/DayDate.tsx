@@ -1,4 +1,11 @@
-const DayDate = (props) => {
+import { FunctionComponent } from "react";
+
+interface Props {
+  time: Date;
+  twentyFourHour: boolean;
+}
+
+const DayDate: FunctionComponent<Props> = (props) => {
   return (
     <div className="day-date">
       <div className="twenty-four-am-pm">

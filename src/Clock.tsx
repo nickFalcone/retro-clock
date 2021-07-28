@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import DayDate from "./DayDate";
 import LightButton from "./LightButton";
 import HourMinute from "./HourMinute";
 import Casio from "./Casio";
 
-const Clock = (props) => {
+interface Props {
+  brand: string;
+  model: string;
+}
+
+const Clock: FunctionComponent<Props> = (props) => {
   const [time, setTime] = useState(new Date());
   const [twentyFourHour, setTwentyFourHours] = useState(false);
 
@@ -13,7 +18,7 @@ const Clock = (props) => {
     return () => clearTimeout(updateTime);
   }, [time, setTime]);
 
-  let holdTimer;
+  let holdTimer: number | undefined;
 
   const mouseDownHandler = () => {
     const dayDate = document.querySelector(".day-date");
@@ -21,13 +26,17 @@ const Clock = (props) => {
     const casio = document.querySelector(".casio");
     // if button is held for 3 seconds, display CASIO message for 3 seconds.
     holdTimer = setTimeout(() => {
-      dayDate.classList.add("hide");
-      time.classList.add("hide");
-      casio.classList.remove("hide");
+      if (dayDate && time && casio) {
+        dayDate.classList.add("hide");
+        time.classList.add("hide");
+        casio.classList.remove("hide");
+      }
       setTimeout(() => {
-        dayDate.classList.remove("hide");
-        time.classList.remove("hide");
-        casio.classList.add("hide");
+        if (dayDate && time && casio) {
+          dayDate.classList.remove("hide");
+          time.classList.remove("hide");
+          casio.classList.add("hide");
+        }
       }, 3000);
     }, 3000);
   };
