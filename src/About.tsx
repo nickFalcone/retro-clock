@@ -10,7 +10,10 @@ const About: FunctionComponent = () => {
       >
         CASIO F91W-1
       </a>
-      .
+      .{" "}
+      <a href="https://github.com/nickFalcone/retro-clock#readme">
+        Project repository
+      </a>
     </footer>
   );
 };
