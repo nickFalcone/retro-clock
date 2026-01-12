@@ -1,48 +1,75 @@
-import { useState, useEffect, FunctionComponent } from "react";
+import { useState, useEffect, useRef } from "react";
 import DayDate from "./DayDate";
 import LightButton from "./LightButton";
 import HourMinute from "./HourMinute";
 import Casio from "./Casio";
+import Stopwatch, { useStopwatch } from "./Stopwatch";
+
+type Mode = "timekeeping" | "stopwatch";
 
 interface Props {
   brand: string;
   model: string;
 }
 
-const Clock: FunctionComponent<Props> = (props) => {
+function Clock(props: Props) {
   const [time, setTime] = useState(new Date());
-  const [twentyFourHour, setTwentyFourHours] = useState(false);
+  const [twentyFourHour, setTwentyFourHour] = useState(false);
+  const [mode, setMode] = useState<Mode>("timekeeping");
+  const [showCasio, setShowCasio] = useState(false);
+  const holdTimerRef = useRef<number | undefined>(undefined);
+
+  const { isRunning, elapsedTime, startStop, reset } = useStopwatch();
 
   useEffect(() => {
     const updateTime = setTimeout(() => setTime(new Date()), 1000);
     return () => clearTimeout(updateTime);
-  }, [time, setTime]);
+  }, [time]);
 
-  let holdTimer: number | undefined;
-
-  const mouseDownHandler = () => {
-    const dayDate = document.querySelector(".day-date");
-    const time = document.querySelector(".time");
-    const casio = document.querySelector(".casio");
-    // if button is held for 3 seconds, display CASIO message for 3 seconds.
-    holdTimer = setTimeout(() => {
-      if (dayDate && time && casio) {
-        dayDate.classList.add("hide");
-        time.classList.add("hide");
-        casio.classList.remove("hide");
-      }
-      setTimeout(() => {
-        if (dayDate && time && casio) {
-          dayDate.classList.remove("hide");
-          time.classList.remove("hide");
-          casio.classList.add("hide");
-        }
-      }, 3000);
-    }, 3000);
+  const handleModePress = () => {
+    if (mode === "timekeeping") {
+      setMode("stopwatch");
+    } else {
+      setMode("timekeeping");
+    }
   };
 
-  const mouseUpHandler = () => {
-    clearTimeout(holdTimer);
+  const handleBottomRightMouseDown = () => {
+    if (mode === "timekeeping") {
+      // Start timer to show CASIO easter egg after 3 seconds
+      holdTimerRef.current = window.setTimeout(() => {
+        setShowCasio(true);
+        setTimeout(() => setShowCasio(false), 3000);
+      }, 3000);
+    }
+  };
+
+  const handleBottomRightMouseUp = () => {
+    if (holdTimerRef.current) {
+      clearTimeout(holdTimerRef.current);
+    }
+  };
+
+  const handleBottomRightClick = () => {
+    if (mode === "timekeeping") {
+      setTwentyFourHour(!twentyFourHour);
+    } else if (mode === "stopwatch") {
+      startStop();
+    }
+  };
+
+  const handleLightButtonClick = () => {
+    // In stopwatch mode, light button resets (when stopped)
+    if (mode === "stopwatch" && !isRunning) {
+      reset();
+    }
+  };
+
+  const getBottomRightLabel = () => {
+    if (mode === "stopwatch") {
+      return isRunning ? "STOP" : elapsedTime > 0 ? "START" : "START";
+    }
+    return "ALARM ON·OFF / 24HR";
   };
 
   return (
@@ -50,23 +77,38 @@ const Clock: FunctionComponent<Props> = (props) => {
       <div className="make-model">
         <h1>{props.brand}</h1> <span className="model">{props.model}</span>
       </div>
-      <LightButton />
+      <LightButton onExtraAction={handleLightButtonClick} />
       <span className="feature">ALARM CHRONOGRAPH</span>
       <div id="lcdFace">
         <div className="black-border">
-          <Casio />
-          <DayDate time={time} twentyFourHour={twentyFourHour} />
-          <HourMinute time={time} twentyFourHour={twentyFourHour} />
+          {showCasio ? (
+            <Casio />
+          ) : mode === "timekeeping" ? (
+            <>
+              <DayDate time={time} twentyFourHour={twentyFourHour} />
+              <HourMinute time={time} twentyFourHour={twentyFourHour} />
+            </>
+          ) : (
+            <Stopwatch
+              onStartStop={startStop}
+              onReset={reset}
+              isRunning={isRunning}
+              elapsedTime={elapsedTime}
+            />
+          )}
         </div>
       </div>
-      <p>
-        MODE
+      <p className="button-row">
+        <button className="mode-btn" onClick={handleModePress}>
+          MODE
+        </button>
         <button
-          onClick={() => setTwentyFourHours(!twentyFourHour)}
-          onMouseDown={mouseDownHandler}
-          onMouseUp={mouseUpHandler}
+          onClick={handleBottomRightClick}
+          onMouseDown={handleBottomRightMouseDown}
+          onMouseUp={handleBottomRightMouseUp}
+          onMouseLeave={handleBottomRightMouseUp}
         >
-          ALARM ON&sdot;OFF / 24HR
+          {getBottomRightLabel()}
         </button>
       </p>
       <p className="water-resist">
@@ -74,6 +116,6 @@ const Clock: FunctionComponent<Props> = (props) => {
       </p>
     </div>
   );
-};
+}
 
 export default Clock;

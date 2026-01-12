@@ -1,11 +1,9 @@
-import { FunctionComponent } from "react";
-
-const Casio: FunctionComponent = () => {
+function Casio() {
   return (
-    <div className="casio hide">
+    <div className="casio">
       <p>CASIo</p>
     </div>
   );
-};
+}
 
 export default Casio;

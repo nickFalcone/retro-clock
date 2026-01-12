@@ -81,6 +81,7 @@ h1 {
 }
 
 .black-border {
+  height: 120px;
   border: 2px solid #000;
   padding: 10px;
   border-radius: 10px;
@@ -175,4 +176,41 @@ footer a {
 
 .hide {
   display: none;
+}
+
+/* Stopwatch mode */
+.stopwatch {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.stopwatch-label {
+  text-align: left;
+  padding-bottom: 5px;
+}
+
+.st-indicator {
+  font-family: Digi;
+  font-size: 24px;
+  color: #1a1a1a;
+}
+
+.stopwatch-time {
+  font-size: 76px;
+}
+
+.stopwatch-minssecs {
+  letter-spacing: -2px;
+}
+
+/* Button row */
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.mode-btn {
+  font-weight: bold;
 }
