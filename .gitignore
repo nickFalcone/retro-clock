@@ -1,8 +1,16 @@
 node_modules/
-.cache/
-.parcel-cache/
 dist/
 .env
 .DS_Store
 coverage/
 .vscode/
+.claude/
+.cache/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Local env files
+*.local
